@@ -6,4 +6,4 @@ root: docs/home
 chapters:
 - file: docs/notebook
 - file: docs/reflection
-- file: workdis
+- file: docs/workdis
