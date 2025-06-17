@@ -27,7 +27,10 @@ Districts with the highest crime rates often overlap with areas that have faced 
 
 ### Argument 2: Policing strategies vary significantly between districts
 Not all police districts operate in the same way. Some focus more on community engagement, while others rely heavily on reactive or aggressive tactics. These differences can impact how residents perceive safety, trust the police, and report crimes. Viewing crime through district patterns allows for more tailored and effective policing strategies that respond to the specific needs of each community. (Visual 6)
+     
 
+
+     
 
 
 **Authors**   
