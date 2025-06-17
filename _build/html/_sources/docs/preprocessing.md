@@ -1,6 +1,8 @@
 # **Dataset and Preprocessing**
 
-## Dataset 1
+
+## Datasets
+### Dataset 1
 The ‘crimes-2001 to Present’ dataset contains, among others, reasons for arrests, dates,
 locations, FBI codes, and community areas. These variables can contribute to detecting a
 pattern in the location of different crimes in combination with the frequency of different
@@ -17,7 +19,7 @@ link: https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q
 
 
 
-## Dataset 2
+### Dataset 2
 The 'Chicago Public Schools - Progress Report Cards (2011-2012)' dataset contains information on all public high schools in Chicago for the 2011–2012 school year. It includes factors such as attendance, teacher score, family involvement, and
 CFS performance. Together, these factors provide a clear and objective view of each
 school’s quality, allowing for meaningful comparisons and analysis. This dataset will be used in the full report (not yet in this draft version)
@@ -26,7 +28,7 @@ link": https://catalog.data.gov/dataset/chicago-public-schools-progress-report-c
 
 
 
-## Dataset 3
+### Dataset 3
 The 'Police sentiment scores' dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights. This dataset will be used in the full report (not yet in this draft version)
 
 link: https://catalog.data.gov/dataset/police-sentiment-scores
