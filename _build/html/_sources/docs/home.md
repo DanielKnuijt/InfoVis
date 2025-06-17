@@ -1,3 +1,0 @@
-# **Introduction**
-
-Chicago is the third largest city in the USA, but is regarded by a lot of people as one of the most dangerous cities in the country. History and Hollywood created the image of Chicago with gangs and violence. But is this still true? Is Chicago still regarded as unsafe, or has Chicago improved in the last couple of years? Does gang violence still have a prominent role in the everyday life of an average person living in Chicago? This data story will investigate the crime numbers in Chicago and will answer the question of whether life in Chicago has improved compared to other US cities.
