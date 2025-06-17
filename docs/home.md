@@ -12,21 +12,21 @@ Although Chicago is often portrayed as a city plagued by uncontrollable crime, t
 
 
 ### Argument 1: Crime is geographically concentrated
-Data shows that the vast majority of violent crimes occur in a limited number of neighborhoods or streets. This indicates that the issue is not citywide, but rather linked to specific areas that have been systematically underserved. A blanket policing strategy across the entire city is inefficient. Instead, localized efforts—such as community-based interventions and neighborhood policing—are more effective in reducing crime in these high-risk zones.
+Data shows that the vast majority of violent crimes occur in a limited number of neighborhoods or streets. This indicates that the issue is not citywide, but rather linked to specific areas that have been systematically underserved. A blanket policing strategy across the entire city is inefficient. Instead, localized efforts—such as community-based interventions and neighborhood policing—are more effective in reducing crime in these high-risk zones. (Visual 4)
 
 ### Argument 2: Crime in Chicago has been gradually declining, especially during the COVID-19 years
-Although crime remains a serious concern in Chicago, overall crime rates have shown a slow but steady decline over the past decade. This trend became particularly noticeable during the COVID-19 pandemic, when certain types of crimes—such as burglary and robbery—dropped significantly due to lockdowns, reduced street activity, and increased police presence. While some violent crimes persisted, the overall data suggests that societal shifts during the pandemic contributed to a temporary reduction in many forms of crime. This shows that environmental and social conditions can have a major influence on crime trends.
+Although crime remains a serious concern in Chicago, overall crime rates have shown a slow but steady decline over the past decade. This trend became particularly noticeable during the COVID-19 pandemic, when certain types of crimes—such as burglary and robbery—dropped significantly due to lockdowns, reduced street activity, and increased police presence. While some violent crimes persisted, the overall data suggests that societal shifts during the pandemic contributed to a temporary reduction in many forms of crime. This shows that environmental and social conditions can have a major influence on crime trends. (Visual 1&3)
 
 
 
 ## Perspective 2: Understanding Crime Through Police Districts Reveals Structural Inequality
-Looking at crime statistics by police district in Chicago reveals a deeper, structural issue: crime is not evenly distributed across the city, and this unevenness reflects long-standing social and economic inequalities. To truly address crime, we must consider how resources and policies are applied across different districts.
+Looking at crime statistics by police district in Chicago reveals a deeper, structural issue: crime is not evenly distributed across the city, and this unevenness reflects long-standing social and economic inequalities. To truly address crime, we must consider how resources and policies are applied across different districts. (Visual 4)
 
 ### Argument 1: High-crime districts often face underinvestment
-Districts with the highest crime rates often overlap with areas that have faced decades of disinvestment, poor public services, and limited economic opportunity. These conditions contribute to higher crime, yet these same districts often receive less proactive community support compared to wealthier, lower-crime areas. Understanding crime through the lens of district-level data helps highlight where resources should be focused to create long-term change.
+Districts with the highest crime rates often overlap with areas that have faced decades of disinvestment, poor public services, and limited economic opportunity. These conditions contribute to higher crime, yet these same districts often receive less proactive community support compared to wealthier, lower-crime areas. Understanding crime through the lens of district-level data helps highlight where resources should be focused to create long-term change. (Visual 5)
 
 ### Argument 2: Policing strategies vary significantly between districts
-Not all police districts operate in the same way. Some focus more on community engagement, while others rely heavily on reactive or aggressive tactics. These differences can impact how residents perceive safety, trust the police, and report crimes. Viewing crime through district patterns allows for more tailored and effective policing strategies that respond to the specific needs of each community.
+Not all police districts operate in the same way. Some focus more on community engagement, while others rely heavily on reactive or aggressive tactics. These differences can impact how residents perceive safety, trust the police, and report crimes. Viewing crime through district patterns allows for more tailored and effective policing strategies that respond to the specific needs of each community. (Visual 6)
 
 
 
