@@ -458,12 +458,63 @@ document.write(`
 
 <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;plot1.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;_static/my_donut_plot.html&quot;</span><span class="p">)</span>  <span class="c1"># for interactive plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">52</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="n">title_font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">47</span>     <span class="n">bargap</span><span class="o">=</span><span class="mf">0.2</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;_static/my_donut_plot.html&quot;</span><span class="p">)</span>  <span class="c1"># for interactive plot</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:3728,</span> in <span class="ni">BaseFigure.write_html</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3625</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3626</span><span class="sd"> Write a figure to an HTML file representation</span>
+<span class="g g-Whitespace">   </span><span class="mi">3627</span><span class="sd"> </span>
+<span class="sd">   (...)   3724 None</span>
+<span class="g g-Whitespace">   </span><span class="mi">3725</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3726</span> <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pio</span>
+<span class="ne">-&gt; </span><span class="mi">3728</span> <span class="k">return</span> <span class="n">pio</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/io/_html.py:508,</span> in <span class="ni">write_html</span><span class="nt">(fig, file, config, auto_play, include_plotlyjs, include_mathjax, post_script, full_html, animation_opts, validate, default_width, default_height, auto_open, div_id)</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="c1"># Write HTML string</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span> <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">507</span>     <span class="c1"># To use a different file encoding, pass a file descriptor</span>
+<span class="ne">--&gt; </span><span class="mi">508</span>     <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">html_str</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">510</span>     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_str</span><span class="p">)</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py:555,</span> in <span class="ni">Path.write_text</span><span class="nt">(self, data, encoding, errors, newline)</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span> <span class="c1"># Call io.text_encoding() here to ensure any warning is raised at an</span>
+<span class="g g-Whitespace">    </span><span class="mi">553</span> <span class="c1"># appropriate stack level.</span>
+<span class="g g-Whitespace">    </span><span class="mi">554</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">text_encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">555</span> <span class="k">return</span> <span class="n">PathBase</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">newline</span><span class="p">)</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py:651,</span> in <span class="ni">PathBase.write_text</span><span class="nt">(self, data, encoding, errors, newline)</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;data must be str, not </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span>                     <span class="n">data</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">651</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="n">newline</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">652</span>     <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py:537,</span> in <span class="ni">Path.open</span><span class="nt">(self, mode, buffering, encoding, errors, newline)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span> <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="n">encoding</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">text_encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">537</span> <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">buffering</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">newline</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;_static/my_donut_plot.html&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<iframe src="plot1.html" width="100%" height="600px"></iframe><div class="cell docutils container">
+<iframe src="_static/my_donut_plot.html" width="100%" height="600px" frameborder="0"></iframe><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
@@ -497,12 +548,14 @@ document.write(`
 <span class="p">)</span>
 
 <span class="c1"># Show the plot</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;my_plot.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;_static/my_donut_plot.html&quot;</span><span class="p">)</span>  <span class="c1"># for interactive plot</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
 </div>
-<iframe src="my_plot.html" width="100%" height="600px"></iframe><div class="cell docutils container">
+</div>
+<iframe src="_static/my_donut_plot.html" width="100%" height="600px" frameborder="0"></iframe><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
@@ -549,12 +602,49 @@ document.write(`
 <span class="p">)</span>
 
 <span class="c1"># Show the plot</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;my_plot.html&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;_static/my_donut_plot.html&quot;</span><span class="p">)</span>  <span class="c1"># for interactive plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">46</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="n">legend_title_text</span><span class="o">=</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="n">title_font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># Show the plot</span>
+<span class="ne">---&gt; </span><span class="mi">46</span> <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/lib/python3.13/site-packages/plotly/basedatatypes.py:3436,</span> in <span class="ni">BaseFigure.show</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3403</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3404</span><span class="sd"> Show a figure using either the default renderer(s) or the renderer(s)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3405</span><span class="sd"> specified by the renderer argument</span>
+<span class="sd">   (...)   3432 None</span>
+<span class="g g-Whitespace">   </span><span class="mi">3433</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3434</span> <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pio</span>
+<span class="ne">-&gt; </span><span class="mi">3436</span> <span class="k">return</span> <span class="n">pio</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /opt/homebrew/Caskroom/miniconda/base/lib/python3.13/site-packages/plotly/io/_renderers.py:425,</span> in <span class="ni">show</span><span class="nt">(fig, renderer, validate, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">420</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">421</span>         <span class="s2">&quot;Mime type rendering requires ipython but it is not installed&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">422</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">424</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">nbformat</span> <span class="ow">or</span> <span class="n">Version</span><span class="p">(</span><span class="n">nbformat</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Version</span><span class="p">(</span><span class="s2">&quot;4.2.0&quot;</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">425</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">426</span>         <span class="s2">&quot;Mime type rendering requires nbformat&gt;=4.2.0 but it is not installed&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">427</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">429</span> <span class="n">display_jupyter_version_warnings</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">431</span> <span class="n">ipython_display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">bundle</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: Mime type rendering requires nbformat&gt;=4.2.0 but it is not installed
 </pre></div>
 </div>
 </div>
 </div>
-<iframe src="my_plot.html" width="100%" height="600px"></iframe></section>
+<iframe src="_static/my_donut_plot.html" width="100%" height="600px" frameborder="0"></iframe></section>
 
     <script type="text/x-thebe-config">
     {
