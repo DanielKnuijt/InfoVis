@@ -30,57 +30,49 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import pandas as pd
 import plotly.express as px
-from plotly.offline import init_notebook_mode
 
-init_notebook_mode()
-
-# Load and filter the dataset
-df = pd.read_csv('dataset/graph123.csv')
-
-# Filter for years 2018 to 2023 and drop invalid rows
-df = df[(df['Year'] >= 2018) & (df['Year'] <= 2023)]
-df = df.drop(columns=['ID', 'Case Number'], errors='ignore')
-df = df.dropna(subset=['Primary Type'])
+# Load and clean data
+df = pd.read_csv("dataset/graph123.csv")
 df['Primary Type'] = df['Primary Type'].astype(str)
+df = df[df['Year'].between(2018, 2023)]
 
-# Compute counts per year and crime type
-yearly_counts = df.groupby(['Year', 'Primary Type']).size().reset_index(name='Count')
+# Calculate top-3 crimes per year by percentage
+top3_list = []
 
-# Calculate total crimes per year
-total_per_year = yearly_counts.groupby('Year')['Count'].sum().reset_index(name='Total')
+for year in sorted(df['Year'].unique()):
+    df_year = df[df['Year'] == year]
+    top3 = df_year['Primary Type'].value_counts(normalize=True).nlargest(3) * 100
+    for crime_type, pct in top3.items():
+        top3_list.append({
+            "Year": year,
+            "Primary Type": crime_type,
+            "Percentage": pct
+        })
 
-# Merge to calculate percent
-yearly_counts = yearly_counts.merge(total_per_year, on='Year')
-yearly_counts['Percent'] = (yearly_counts['Count'] / yearly_counts['Total']) * 100
-
-# Get top-3 crimes per year
-top3 = (
-    yearly_counts.sort_values(['Year', 'Count'], ascending=[True, False])
-    .groupby('Year')
-    .head(3)
-)
+# Create a DataFrame from the list
+top3_df = pd.DataFrame(top3_list)
 
 # Plot using Plotly
 fig = px.bar(
-    top3,
-    x='Year',
-    y='Percent',
-    color='Primary Type',
-    barmode='group',
-    title='Top 3 Crime Types per Year (2018–2023)',
-    labels={'Primary Type': 'Crime Type', 'Percent': 'Percentage'},
-    text=top3['Percent'].round(1).astype(str) + '%'
-)
-
-fig.update_layout(
-    xaxis=dict(type='category'),
-    title_font=dict(size=20),
-    legend_title_text='Crime Type',
-    yaxis_title='Percentage of Total Crimes',
-    bargap=0.2
+    top3_df,
+    x="Year",
+    y="Percentage",
+    color="Primary Type",
+    barmode="group",
+    text=top3_df["Percentage"].round(1).astype(str) + "%",
+    color_discrete_sequence=px.colors.qualitative.Set2
 )
 
 fig.update_traces(textposition='outside')
+fig.update_layout(
+    title="Top 3 Crime Types per Year (2018–2023)",
+    xaxis_title="Year",
+    yaxis_title="Percentage of Crimes",
+    yaxis=dict(range=[0, top3_df["Percentage"].max() + 5]),
+    legend_title="Primary Type",
+    bargap=0.25,
+    template="plotly_white"
+)
 
 fig.show()
 
@@ -89,12 +81,12 @@ fig.show()
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 8[39m
-[32m      5[39m init_notebook_mode()
-[32m      7[39m [38;5;66;03m# Load and filter the dataset[39;00m
-[32m----> [39m[32m8[39m df = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m'[39;49m[33;43mdataset/graph123.csv[39;49m[33;43m'[39;49m[43m)[49m
-[32m     10[39m [38;5;66;03m# Filter for years 2018 to 2023 and drop invalid rows[39;00m
-[32m     11[39m df = df[(df[[33m'[39m[33mYear[39m[33m'[39m] >= [32m2018[39m) & (df[[33m'[39m[33mYear[39m[33m'[39m] <= [32m2023[39m)]
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 5[39m
+[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mplotly[39;00m[34;01m.[39;00m[34;01mexpress[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpx[39;00m
+[32m      4[39m [38;5;66;03m# Load and clean data[39;00m
+[32m----> [39m[32m5[39m df = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m"[39;49m[33;43mdataset/graph123.csv[39;49m[33;43m"[39;49m[43m)[49m
+[32m      6[39m df[[33m'[39m[33mPrimary Type[39m[33m'[39m] = df[[33m'[39m[33mPrimary Type[39m[33m'[39m].astype([38;5;28mstr[39m)
+[32m      7[39m df = df[df[[33m'[39m[33mYear[39m[33m'[39m].between([32m2018[39m, [32m2023[39m)]
 
 [36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pandas/io/parsers/readers.py:1026[39m, in [36mread_csv[39m[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[39m
 [32m   1013[39m kwds_defaults = _refine_defaults_read(
