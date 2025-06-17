@@ -3,7 +3,7 @@
 
 title: Crime by the numbers; a datastory of Chicago
 author: InfoVis group G3 # Change this to your name (or your team/organization name).
-logo: misc./logo.jph
+logo: misc./logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
