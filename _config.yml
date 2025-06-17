@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Crime by the numbers':' a datastory of Chicago# Change this to your book title.
+title: Crime by the numbers; a datastory of Chicago
 author: Daniel Knuijt # Change this to your name (or your team/organization name).
 
 # Force re-execution of notebooks on each build.
