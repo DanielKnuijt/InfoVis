@@ -2,7 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Crime by the numbers; a datastory of Chicago
-author: Daniel Knuijt # Change this to your name (or your team/organization name).
+author: InfoVis group G3 # Change this to your name (or your team/organization name).
+logo: misc/logo.jph
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -37,6 +38,10 @@ sphinx:
     # This is to work around the bug of no syntax highlighting
     - "IPython.sphinxext.ipython_console_highlighting"
   config:
+    html_context: 
+      default_mode: 'light'
+    html_static_path: 'static'
     html_js_files:
       # This is for plotly to work
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+      - js/enforce-light-theme.js
