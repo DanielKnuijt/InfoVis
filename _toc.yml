@@ -4,7 +4,7 @@
 format: jb-book
 root: docs/home
 chapters:
-- file: introduction
+- file: docs/introduction
 - file: docs/notebook
 - file: docs/reflection
 - file: docs/workdis
