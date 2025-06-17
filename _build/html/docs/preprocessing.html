@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reflection &#8212; Crime by the numbers; a datastory of Chicago</title>
+    <title>Dataset and Preprocessing &#8212; Crime by the numbers; a datastory of Chicago</title>
   
   
   
@@ -57,13 +57,13 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/reflection';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/preprocessing';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/enforce-light-theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Work distribution" href="workdis.html" />
-    <link rel="prev" title="Visualisations and perspectives" href="datastory.html" />
+    <link rel="next" title="Visualisations and perspectives" href="datastory.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,9 +181,9 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html"><strong>Dataset and Preprocessing</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Dataset and Preprocessing</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="datastory.html"><strong>Visualisations and perspectives</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Reflection</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="reflection.html"><strong>Reflection</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="workdis.html"><strong>Work distribution</strong></a></li>
 </ul>
 
@@ -256,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/DanielKnuijt/InfoVis/issues/new?title=Issue%20on%20page%20%2Fdocs/reflection.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DanielKnuijt/InfoVis/issues/new?title=Issue%20on%20page%20%2Fdocs/preprocessing.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -286,7 +286,7 @@
       
       
       
-      <li><a href="../_sources/docs/reflection.md" target="_blank"
+      <li><a href="../_sources/docs/preprocessing.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -370,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reflection</h1>
+    <h1>Dataset and Preprocessing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,7 +380,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-1">Dataset 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-2">Dataset 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-3">Dataset 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals">Visuals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-1-4">Visuals 1-4</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-1">Visual 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-2">Visual 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-3">Visual 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -392,16 +405,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="reflection">
-<h1><strong>Reflection</strong><a class="headerlink" href="#reflection" title="Link to this heading">#</a></h1>
-<p>Conducting this data project on crime in Chicago provided valuable insights into the patterns, challenges, and implications of urban crime through a data-driven lens. The process involved collecting, cleaning, analyzing, and interpreting crime data from publicly available sources, such as the City of Chicago Data Portal. Through this exploration, I was able to deepen my understanding not only of the types and frequency of crimes but also of their geographic and temporal distribution across the city.</p>
-<p>One of the key reflections from this project is the importance of data quality and preprocessing. The raw dataset contained a large volume of records, including missing values, inconsistent formatting, and irrelevant entries. Cleaning this data was essential for generating accurate insights. This step taught me the importance of attention to detail and the potential pitfalls of working with real-world datasets. It also emphasized the need for transparency in reporting limitations and assumptions in any data analysis.</p>
-<p>In terms of tools and methods, I applied various data analysis techniques using Python libraries such as pandas, matplotlib, and seaborn, along with geographic visualization tools like Folium or geopandas to map crime locations. These tools enabled me to create visual representations of crime hotspots, temporal trends, and patterns based on variables such as time of day, location, and crime type. For example, I was able to identify neighborhoods with higher crime concentrations and observe trends such as increased incidents during summer months or weekends.</p>
-<p>The project also brought to light the socio-economic dimensions of crime. Although the analysis focused on numerical data, it became evident that crime is often concentrated in areas with higher poverty rates and lower access to education and employment opportunities. While correlation does not imply causation, this observation highlights the need for broader policy considerations and community-level interventions to address root causes of crime, not just its symptoms.</p>
-<p>From a reflective standpoint, this project strengthened my analytical thinking and coding skills, while also reinforcing the ethical responsibility of working with sensitive data. Interpreting crime data requires care to avoid drawing biased or overly simplistic conclusions that could reinforce stereotypes or overlook systemic factors. This experience encouraged me to adopt a more holistic and thoughtful approach to data storytelling.</p>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
-<p>In conclusion, analyzing crime in Chicago through a data science lens was a rewarding and eye-opening experience. It showcased how data can inform public policy, improve community safety, and drive social change when used responsibly. While the project answered many questions, it also opened the door to new inquirie, for example, how do policing strategies impact crime rates, or what role does urban design play in crime prevention? These questions reflect the dynamic and evolving nature of data analysis and public safety research.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="dataset-and-preprocessing">
+<h1><strong>Dataset and Preprocessing</strong><a class="headerlink" href="#dataset-and-preprocessing" title="Link to this heading">#</a></h1>
+<section id="dataset-1">
+<h2>Dataset 1<a class="headerlink" href="#dataset-1" title="Link to this heading">#</a></h2>
+<p>The ‘crimes-2001 to Present’ dataset contains, among others, reasons for arrests, dates,
+locations, FBI codes, and community areas. These variables can contribute to detecting a
+pattern in the location of different crimes in combination with the frequency of different
+crimes. This knowledge can inform Chicago residents about the possible dangers of
+different high-risk areas in Chicago. All data in this dataset is collected from the Chicago
+police department’s own CLEAR (Citizen Law Enforcement Analysis and Reporting)
+system, ensuring optimal credibility.
+Screenshot of the result of running pandas.DataFrame.head(n=5) on your dataset:
+Choose at least one variable in the dataset that your team wants to explore, explain
+what the variables mean, and explain how the variable(s) can help you form
+perspectives/arguments.</p>
+<p>link: <a class="reference external" href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/about_data">https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/about_data</a></p>
+</section>
+<section id="dataset-2">
+<h2>Dataset 2<a class="headerlink" href="#dataset-2" title="Link to this heading">#</a></h2>
+<p>The ‘Chicago Public Schools - Progress Report Cards (2011-2012)’ dataset contains information on all public high schools in Chicago for the 2011–2012 school year. It includes factors such as attendance, teacher score, family involvement, and
+CFS performance. Together, these factors provide a clear and objective view of each
+school’s quality, allowing for meaningful comparisons and analysis. This dataset will be used in the full report (not yet in this draft version)</p>
+<p>link”: <a class="reference external" href="https://catalog.data.gov/dataset/chicago-public-schools-progress-report-cards-2011-2012">https://catalog.data.gov/dataset/chicago-public-schools-progress-report-cards-2011-2012</a></p>
+</section>
+<section id="dataset-3">
+<h2>Dataset 3<a class="headerlink" href="#dataset-3" title="Link to this heading">#</a></h2>
+<p>The ‘Police sentiment scores’ dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights. This dataset will be used in the full report (not yet in this draft version)</p>
+<p>link: <a class="reference external" href="https://catalog.data.gov/dataset/police-sentiment-scores">https://catalog.data.gov/dataset/police-sentiment-scores</a></p>
+</section>
+<section id="visuals">
+<h2>Visuals<a class="headerlink" href="#visuals" title="Link to this heading">#</a></h2>
+<section id="visuals-1-4">
+<h3>Visuals 1-4<a class="headerlink" href="#visuals-1-4" title="Link to this heading">#</a></h3>
+<p>These visuals are all made using the Preprocessed dataset 1, containing only the data from the years 2018-2023. This selection gives plenty of records to ensure reliable results. This timespan also gives an interesting insight on the influence of the COVID-19 pandemic on Chicago’s crime life.</p>
+<section id="visual-1">
+<h4>Visual 1<a class="headerlink" href="#visual-1" title="Link to this heading">#</a></h4>
+<p>The most common crime types are counted where empty rows are ignored. At last, this result is presented as percentages of the total amount of crimes committed during 6-year time span.</p>
+</section>
+<section id="visual-2">
+<h4>Visual 2<a class="headerlink" href="#visual-2" title="Link to this heading">#</a></h4>
+<p>The total number of rows are counted for each one of the six years, and put into a line-diagram.</p>
+</section>
+<section id="visual-3">
+<h4>Visual 3<a class="headerlink" href="#visual-3" title="Link to this heading">#</a></h4>
+<p>The most common crime-scenes are counted and put into a pie-chart. This pie chart clearly shows the most popular crime-scenes, together with some less-popular crime-scenes. This pie-chart shows the average of the years 2018-2023. Finally the Pie-chart is transformed into a donut-chart for aestetic purposes.</p>
+</section>
+<section id="visual-4">
+<h4>Visual 4<a class="headerlink" href="#visual-4" title="Link to this heading">#</a></h4>
+<p>The total amount of crimes are counted for each Police-district in Chicago. This Bar chart gives a clear visual of the difference in crimes in various districts.</p>
+<p>in the Final project we plan to replace the numbers (x-axis) with the actual names of each district, removing the empty spaces (like district 13,21,etc.)</p>
+</section>
+</section>
+<section id="visuals-5-6">
+<h3>Visuals 5 &amp; 6<a class="headerlink" href="#visuals-5-6" title="Link to this heading">#</a></h3>
+<p>these will be in the final report (they are not finished for this draft version)</p>
+</section>
 </section>
 </section>
 
@@ -436,20 +495,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="datastory.html"
+       href="introduction.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Visualisations and perspectives</strong></p>
+        <p class="prev-next-title"><strong>Introduction</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="workdis.html"
+       href="datastory.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Work distribution</strong></p>
+        <p class="prev-next-title"><strong>Visualisations and perspectives</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -469,7 +528,20 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-1">Dataset 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-2">Dataset 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-3">Dataset 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals">Visuals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-1-4">Visuals 1-4</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-1">Visual 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-2">Visual 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-3">Visual 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
