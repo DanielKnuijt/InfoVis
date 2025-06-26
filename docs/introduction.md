@@ -27,11 +27,11 @@ While Chicago is often known for high crime rates, there have been positive deve
 
 ## Perspective 2: Crime Distribution per Police District in Chicago
 
-Crime is not evenly distributed across Chicago, with certain police districts facing significantly higher incident rates.
+Crime is not evenly distributed across Chicago, with certain police districts which are numbered rather than named facing significantly higher incident rates.
 
 ### Argument 1 – High-Risk Areas Identified:
  
- Certain police districts, such as District 8, 7, and 6, report significantly more crimes than other parts of the city. These areas are often characterized by higher population density, socioeconomic challenges, and complex social issues, like lower income, that contribute to elevated crime levels[4]. Identifying these high-risk zones helps authorities allocate resources more effectively to the areas where they are most needed. Also the income scales with the safety score that people give, so they can identify districts with lower income with possible danger in the district. (Visuals 4 and 5)
+ CWhen analyzing the types of crimes committed, it becomes clear that common offenses such as theft (stealing without violence), battery (physical assault), and property damage (deliberate destruction or vandalism of public or private property) have remained relatively consistent. These areas are often characterized by higher population density, socioeconomic challenges, and complex social issues, like lower income, that contribute to elevated crime levels[4]. Identifying these high-risk zones helps authorities allocate resources more effectively to the areas where they are most needed. Also the income scales with the safety score that people give, so they can identify districts with lower income with possible danger in the district. (Visuals 4 and 5)
 
 ### Argument 2 – Effectiveness of Targeted Interventions:
  
