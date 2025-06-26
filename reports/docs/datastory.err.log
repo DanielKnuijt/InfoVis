@@ -1,0 +1,146 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 721, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+import plotly.express as px
+import plotly.offline as pyo
+from IPython.display import HTML
+
+# 📄 Load CSV files
+crime_df = pd.read_csv('dataset/graph4.csv')             # crime data
+trust_safety_df = pd.read_csv('dataset/sentfinal.csv')   # socioeconomic and safety data
+
+# Clean and merge
+crime_counts = crime_df['District'].value_counts().reset_index()
+crime_counts.columns = ['District', 'Total_Crimes']
+trust_safety_df = trust_safety_df.rename(columns={'DISTRICT': 'District'})
+
+merged_df = pd.merge(trust_safety_df, crime_counts, on='District', how='inner')
+
+# Extract list of unique years
+years = sorted(merged_df['YEAR'].unique())
+
+# Create a trace set for each year
+fig = go.Figure()
+
+for year in years:
+    year_df = merged_df[merged_df['YEAR'] == year].sort_values(by='SAFETY', ascending=False).reset_index(drop=True)
+    x_pos = list(range(len(year_df)))
+
+    fig.add_trace(go.Bar(
+        name='Low Income',
+        x=x_pos,
+        y=year_df['S_INCOME_LOW'],
+        visible=(year == years[0]),
+        hovertemplate='<b>%{text}</b><br>Low Income: %{y}',
+        # text=year_df['District']
+    ))
+
+    fig.add_trace(go.Bar(
+        name='Medium Income',
+        x=x_pos,
+        y=year_df['S_INCOME_MEDIUM'],
+        visible=(year == years[0]),
+        hovertemplate='<b>%{text}</b><br>Medium Income: %{y}',
+        # text=year_df['District']
+    ))
+
+    fig.add_trace(go.Bar(
+        name='High Income',
+        x=x_pos,
+        y=year_df['S_INCOME_HIGH'],
+        visible=(year == years[0]),
+        hovertemplate='<b>%{text}</b><br>High Income: %{y}',
+        # text=year_df['District']
+    ))
+
+    fig.add_trace(go.Bar(
+        name='Safety Score',
+        x=x_pos,
+        y=year_df['SAFETY'],
+        visible=(year == years[0]),
+        hovertemplate='<b>%{text}</b><br>Safety Score: %{y}',
+        # text=year_df['District']
+    ))
+
+# Create dropdown buttons
+buttons = []
+for i, year in enumerate(years):
+    visible = [False] * len(years) * 4
+    for j in range(4):
+        visible[i * 4 + j] = True
+    buttons.append(dict(
+        label=str(year),
+        method='update',
+        args=[{'visible': visible},
+              {'title': f'Income Levels and Safety Score by District - {year}'}]
+    ))
+
+# Update layout
+fig.update_layout(
+    updatemenus=[{
+        'buttons': buttons,
+        'direction': 'down',
+        'showactive': True,
+        'x': 1.15,
+        'xanchor': 'left',
+        'y': 1.1,
+        'yanchor': 'top'
+    }],
+    barmode='group',
+    xaxis=dict(
+        tickmode='array',
+        tickvals=list(range(len(merged_df['District'].unique()))),
+        ticktext=merged_df['District'].unique(),
+        tickangle=-45,
+        title='District (High Safety → Low Safety)'
+    ),
+    yaxis_title='Value',
+    title=f'Income Levels and Safety Score by District - {years[0]}',
+    hovermode='x unified'
+)
+
+plot_html = pyo.plot(fig, include_plotlyjs='cdn', output_type='div')
+HTML(plot_html)
+
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 21[39m
+[32m     18[39m years = [38;5;28msorted[39m(merged_df[[33m'[39m[33mYEAR[39m[33m'[39m].unique())
+[32m     20[39m [38;5;66;03m# Create a trace set for each year[39;00m
+[32m---> [39m[32m21[39m fig = [43mgo[49m.Figure()
+[32m     23[39m [38;5;28;01mfor[39;00m year [38;5;129;01min[39;00m years:
+[32m     24[39m     year_df = merged_df[merged_df[[33m'[39m[33mYEAR[39m[33m'[39m] == year].sort_values(by=[33m'[39m[33mSAFETY[39m[33m'[39m, ascending=[38;5;28;01mFalse[39;00m).reset_index(drop=[38;5;28;01mTrue[39;00m)
+
+[31mNameError[39m: name 'go' is not defined
+
