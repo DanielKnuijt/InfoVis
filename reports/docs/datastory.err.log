@@ -28,7 +28,6 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-'''
 import pandas as pd
 import geopandas as gpd
 import folium
@@ -95,10 +94,9 @@ folium.GeoJson(
 
 colormap.add_to(chicago_map)
 
-chicago_map.save('chicago_crime_map.html')
-'''
 from IPython.display import IFrame
 IFrame('images/chicago_crime_map.html', width='100%', height=600)
+
 
 chicago_map
 
@@ -106,11 +104,12 @@ chicago_map
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 73[39m
-[32m     70[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mIPython[39;00m[34;01m.[39;00m[34;01mdisplay[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m IFrame
-[32m     71[39m IFrame([33m'[39m[33mimages/chicago_crime_map.html[39m[33m'[39m, width=[33m'[39m[33m100[39m[33m%[39m[33m'[39m, height=[32m600[39m)
-[32m---> [39m[32m73[39m [43mchicago_map[49m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 2[39m
+[32m      1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
+[32m----> [39m[32m2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mgeopandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mgpd[39;00m
+[32m      3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mfolium[39;00m
+[32m      4[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mfolium[39;00m[34;01m.[39;00m[34;01mplugins[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m MarkerCluster
 
-[31mNameError[39m: name 'chicago_map' is not defined
+[31mModuleNotFoundError[39m: No module named 'geopandas'
 
