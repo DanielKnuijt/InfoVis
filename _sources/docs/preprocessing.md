@@ -10,25 +10,11 @@ crimes. This knowledge can inform Chicago residents about the possible dangers o
 different high-risk areas in Chicago. All data in this dataset is collected from the Chicago
 police department’s own CLEAR (Citizen Law Enforcement Analysis and Reporting)
 system, ensuring optimal credibility.
-Screenshot of the result of running pandas.DataFrame.head(n=5) on your dataset:
-Choose at least one variable in the dataset that your team wants to explore, explain
-what the variables mean, and explain how the variable(s) can help you form
-perspectives/arguments.
 
 link: https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/about_data
 
 
-
 ### Dataset 2
-The 'Chicago Public Schools - Progress Report Cards (2011-2012)' dataset contains information on all public high schools in Chicago for the 2011–2012 school year. It includes factors such as attendance, teacher score, family involvement, and
-CFS performance. Together, these factors provide a clear and objective view of each
-school’s quality, allowing for meaningful comparisons and analysis. This dataset will be used in the full report (not yet in this draft version)
-
-link": https://catalog.data.gov/dataset/chicago-public-schools-progress-report-cards-2011-2012
-
-
-
-### Dataset 3
 The 'Police sentiment scores' dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights. This dataset will be used in the full report (not yet in this draft version)
 
 link: https://catalog.data.gov/dataset/police-sentiment-scores
