@@ -29,7 +29,7 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 import plotly.offline as pyo
 from IPython.display import HTML
 
@@ -52,15 +52,16 @@ fig = go.Figure()
 
 for year in years:
     year_df = merged_df[merged_df['YEAR'] == year].sort_values(by='SAFETY', ascending=False).reset_index(drop=True)
-    x_pos = list(range(len(year_df)))
+    x_pos = list(range(len(df_year)))
+    x_labels = year_df['District'].astype(str)
+
 
     fig.add_trace(go.Bar(
         name='Low Income',
         x=x_pos,
         y=year_df['S_INCOME_LOW'],
         visible=(year == years[0]),
-        hovertemplate='<b>%{text}</b><br>Low Income: %{y}',
-        # text=year_df['District']
+        hovertemplate='Low Income: %{y:.1f}%<extra></extra>',
     ))
 
     fig.add_trace(go.Bar(
@@ -68,8 +69,7 @@ for year in years:
         x=x_pos,
         y=year_df['S_INCOME_MEDIUM'],
         visible=(year == years[0]),
-        hovertemplate='<b>%{text}</b><br>Medium Income: %{y}',
-        # text=year_df['District']
+        hovertemplate='Medium Income: %{y:.1f}%<extra></extra>',
     ))
 
     fig.add_trace(go.Bar(
@@ -77,8 +77,7 @@ for year in years:
         x=x_pos,
         y=year_df['S_INCOME_HIGH'],
         visible=(year == years[0]),
-        hovertemplate='<b>%{text}</b><br>High Income: %{y}',
-        # text=year_df['District']
+        hovertemplate='High Income: %{y:.1f}%<extra></extra>',
     ))
 
     fig.add_trace(go.Bar(
@@ -86,8 +85,7 @@ for year in years:
         x=x_pos,
         y=year_df['SAFETY'],
         visible=(year == years[0]),
-        hovertemplate='<b>%{text}</b><br>Safety Score: %{y}',
-        # text=year_df['District']
+        hovertemplate='Safety Score: %{y:.1f}%<extra></extra>',
     ))
 
 # Create dropdown buttons
@@ -105,28 +103,40 @@ for i, year in enumerate(years):
 
 # Update layout
 fig.update_layout(
+    title=f'Income Levels and Safety Score by District - {years[0]}',
+    barmode='group',
+    legend=dict(
+        orientation="h",
+        y=1.1,
+        x=0,
+        xanchor='left',
+        yanchor='bottom',
+        font=dict(size=12)
+    ),
     updatemenus=[{
         'buttons': buttons,
         'direction': 'down',
         'showactive': True,
-        'x': 1.15,
+        'x': 0.85,
         'xanchor': 'left',
-        'y': 1.1,
+        'y': 1.13,  # dropdown just above legend
         'yanchor': 'top'
     }],
-    barmode='group',
-    xaxis=dict(
+    margin=dict(t=150),  # more space at the top
+        xaxis=dict(
         tickmode='array',
-        tickvals=list(range(len(merged_df['District'].unique()))),
-        ticktext=merged_df['District'].unique(),
+        tickvals=list(range(len(df_year))),
+        ticktext=df_year['District'],
         tickangle=-45,
-        title='District (High Safety → Low Safety)'
+        title='District (High Crime → Low Crime)'
     ),
-    yaxis_title='Value',
-    title=f'Income Levels and Safety Score by District - {years[0]}',
-    hovermode='x unified'
+    yaxis_title='Percentage',
+    hovermode='x unified',
+    height=600,
+    width=1000
 )
 
+# Render the chart
 plot_html = pyo.plot(fig, include_plotlyjs='cdn', output_type='div')
 HTML(plot_html)
 
@@ -135,12 +145,16 @@ HTML(plot_html)
 
 [31m---------------------------------------------------------------------------[39m
 [31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 21[39m
-[32m     18[39m years = [38;5;28msorted[39m(merged_df[[33m'[39m[33mYEAR[39m[33m'[39m].unique())
-[32m     20[39m [38;5;66;03m# Create a trace set for each year[39;00m
-[32m---> [39m[32m21[39m fig = [43mgo[49m.Figure()
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 25[39m
 [32m     23[39m [38;5;28;01mfor[39;00m year [38;5;129;01min[39;00m years:
 [32m     24[39m     year_df = merged_df[merged_df[[33m'[39m[33mYEAR[39m[33m'[39m] == year].sort_values(by=[33m'[39m[33mSAFETY[39m[33m'[39m, ascending=[38;5;28;01mFalse[39;00m).reset_index(drop=[38;5;28;01mTrue[39;00m)
+[32m---> [39m[32m25[39m     x_pos = [38;5;28mlist[39m([38;5;28mrange[39m([38;5;28mlen[39m([43mdf_year[49m)))
+[32m     26[39m     x_labels = year_df[[33m'[39m[33mDistrict[39m[33m'[39m].astype([38;5;28mstr[39m)
+[32m     29[39m     fig.add_trace(go.Bar(
+[32m     30[39m         name=[33m'[39m[33mLow Income[39m[33m'[39m,
+[32m     31[39m         x=x_pos,
+[32m   (...)[39m[32m     34[39m         hovertemplate=[33m'[39m[33mLow Income: [39m[33m%[39m[38;5;132;01m{y:.1f}[39;00m[33m%[39m[33m<extra></extra>[39m[33m'[39m,
+[32m     35[39m     ))
 
-[31mNameError[39m: name 'go' is not defined
+[31mNameError[39m: name 'df_year' is not defined
 
