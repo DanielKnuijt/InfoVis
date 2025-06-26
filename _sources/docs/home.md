@@ -1,4 +1,4 @@
-# **Crime by the numbers: A Data Story of Chicago**
+# **Crime by numbers: A Data Story of Chicago**
 Daniel Knuijt, Mica Blaauw, Alex Oprea and Dinant Zonnevelt    
 Group G3 | Universiteit van Amsterdam
 
