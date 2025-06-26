@@ -29,84 +29,295 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import pandas as pd
-import geopandas as gpd
-import folium
-from folium.plugins import MarkerCluster
-import branca.colormap as cm
-from IPython.display import IFrame
+import plotly.graph_objects as go
+import plotly.offline as pyo
+from IPython.display import HTML
 
-from plotly.offline import init_notebook_mode
-init_notebook_mode(connected=True)
+# 📄 Load CSV files
+crime_df = pd.read_csv('dataset/graph4.csv')             # crime data
+trust_safety_df = pd.read_csv('dataset/sentfinal.csv')   # socioeconomic and safety data
 
-crime_df = pd.read_csv('dataset/graph4.csv')
+# Clean and merge
+crime_counts = crime_df['District'].value_counts().reset_index()
+crime_counts.columns = ['District', 'Total_Crimes']
+trust_safety_df = trust_safety_df.rename(columns={'DISTRICT': 'District'})
 
-districts_gdf = gpd.read_file('map.geojson')
+merged_df = pd.merge(trust_safety_df, crime_counts, on='District', how='inner')
 
-if crime_df.empty:
-    print("Error: Crime dataset is empty. Please check the URL or file path.")
-    exit()
+# Extract list of unique years
+years = sorted(merged_df['YEAR'].unique())
 
-print("Unique District values in crime dataset (before cleaning):", sorted(crime_df['District'].astype(str).unique()))
+# Create figure
+fig = go.Figure()
 
+for year in years:
+    year_df = merged_df[merged_df['YEAR'] == year].sort_values(by='SAFETY', ascending=False).reset_index(drop=True)
+    x_labels = year_df['District'].astype(str)
 
-crime_df['District'] = crime_df['District'].astype(str).str.replace('.0', '').str.strip()
-crime_df = crime_df[crime_df['District'] != 'nan']
+    custom_data = year_df[['District']]
 
-print("Unique District values in crime dataset (after cleaning):", sorted(crime_df['District'].unique()))
+    fig.add_trace(go.Bar(
+        name='Low Income',
+        x=x_labels,
+        y=year_df['S_INCOME_LOW'],
+        visible=(year == years[0]),
+        customdata=custom_data,
+        hovertemplate='Low Income: %{y:.1f}%<extra></extra>'
+    ))
 
-crime_counts = crime_df.groupby('District').size().reset_index(name='Crime_Count')
-print("Crime counts by district:\n", crime_counts)
+    fig.add_trace(go.Bar(
+        name='Medium Income',
+        x=x_labels,
+        y=year_df['S_INCOME_MEDIUM'],
+        visible=(year == years[0]),
+        customdata=custom_data,
+        hovertemplate='Medium Income: %{y:.1f}%<extra></extra>'
+    ))
 
-districts_gdf = gpd.read_file('map.geojson')
+    fig.add_trace(go.Bar(
+        name='High Income',
+        x=x_labels,
+        y=year_df['S_INCOME_HIGH'],
+        visible=(year == years[0]),
+        customdata=custom_data,
+        hovertemplate='High Income: %{y:.1f}%<extra></extra>'
+    ))
 
-print("Unique dist_num values in GeoJSON:", sorted(districts_gdf['dist_num'].astype(str).unique()))
+    fig.add_trace(go.Bar(
+        name='Safety Score',
+        x=x_labels,
+        y=year_df['SAFETY'],
+        visible=(year == years[0]),
+        customdata=custom_data,
+        hovertemplate='Safety Score: %{y:.1f}%<extra></extra>'
+    ))
 
-districts_gdf['dist_num'] = districts_gdf['dist_num'].astype(str).str.strip()
+# Create dropdown buttons
+buttons = []
+for i, year in enumerate(years):
+    visible = [False] * len(years) * 4
+    for j in range(4):
+        visible[i * 4 + j] = True
 
-districts_gdf = districts_gdf.merge(crime_counts, left_on='dist_num', right_on='District', how='left')
-districts_gdf['Crime_Count'] = districts_gdf['Crime_Count'].fillna(0)
+    year_df = merged_df[merged_df['YEAR'] == year].sort_values(by='SAFETY', ascending=False).reset_index(drop=True)
+    x_labels = year_df['District'].astype(str)
 
-print("Merged GeoDataFrame:\n", districts_gdf[['dist_num', 'dist_label', 'Crime_Count']])
+    buttons.append(dict(
+        label=str(year),
+        method='update',
+        args=[
+            {'visible': visible},
+            {
+                'layout': {
+                    'title': f'Income Levels and Safety Score by District - {year}',
+                    'xaxis': {
+                        'tickmode': 'array',
+                        'tickvals': x_labels,
+                        'ticktext': x_labels,
+                        'tickangle': -45,
+                        'title': 'District (High Safety → Low Safety)'
+                    }
+                }
+            }
+        ]
+    ))
 
-chicago_map = folium.Map(location=[41.8781, -87.6298], zoom_start=11, tiles='CartoDB positron')
+# Initial year axis setup
+initial_year = years[0]
+initial_year_df = merged_df[merged_df['YEAR'] == initial_year].sort_values(by='SAFETY', ascending=False).reset_index(drop=True)
+initial_x_labels = initial_year_df['District'].astype(str)
 
-colormap = cm.LinearColormap(
-    colors=['#f0f9e8', '#bae4bc', '#7bccc4', '#43a2ca', '#0868ac'],
-    vmin=districts_gdf['Crime_Count'].min(),
-    vmax=districts_gdf['Crime_Count'].max() if districts_gdf['Crime_Count'].max() > 0 else 1,
-    caption='Crime Count by Police District'
+# Update layout
+fig.update_layout(
+    title=f'Income Levels and Safety Score by District',
+    barmode='group',
+    legend=dict(
+        orientation="h",
+        y=1.1,
+        x=0,
+        xanchor='left',
+        yanchor='bottom',
+        font=dict(size=12)
+    ),
+    updatemenus=[{
+        'buttons': buttons,
+        'direction': 'down',
+        'showactive': True,
+        'x': 0.60,
+        'xanchor': 'left',
+        'y': 1.18,
+        'yanchor': 'top'
+    }],
+    margin=dict(t=150),
+    xaxis=dict(
+        tickmode='array',
+        tickvals=initial_x_labels,
+        ticktext=initial_x_labels,
+        tickangle=-45,
+        title='District (High Safety → Low Safety)'
+    ),
+    yaxis_title='Percentage',
+    hovermode='x unified',
+    hoverlabel=dict(
+        bgcolor="white",
+        font_size=14,
+        font_family="Arial"
+    ),
+    height=600,
+    width='100%'
 )
 
-folium.GeoJson(
-    districts_gdf,
-    style_function=lambda feature: {
-        'fillColor': colormap(feature['properties']['Crime_Count']),
-        'color': 'black',
-        'weight': 1,
-        'fillOpacity': 0.7,
-    },
-    tooltip=folium.GeoJsonTooltip(
-        fields=['dist_label', 'Crime_Count'],
-        aliases=['District', 'Crime Count'],
-        localize=True
-    )
-).add_to(chicago_map)
-
-colormap.add_to(chicago_map)
-
-chicago_map.save('chicago_crime_map.html')
-IFrame('chicago_crime_map.html', width='100%', height=600)
+# Render the chart
+plot_html = pyo.plot(fig, include_plotlyjs='cdn', output_type='div')
+HTML(plot_html)
 
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 2[39m
-[32m      1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m----> [39m[32m2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mgeopandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mgpd[39;00m
-[32m      3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mfolium[39;00m
-[32m      4[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mfolium[39;00m[34;01m.[39;00m[34;01mplugins[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m MarkerCluster
+[31mValueError[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 101[39m
+[32m     98[39m initial_x_labels = initial_year_df[[33m'[39m[33mDistrict[39m[33m'[39m].astype([38;5;28mstr[39m)
+[32m    100[39m [38;5;66;03m# Update layout[39;00m
+[32m--> [39m[32m101[39m [43mfig[49m[43m.[49m[43mupdate_layout[49m[43m([49m
+[32m    102[39m [43m    [49m[43mtitle[49m[43m=[49m[33;43mf[39;49m[33;43m'[39;49m[33;43mIncome Levels and Safety Score by District[39;49m[33;43m'[39;49m[43m,[49m
+[32m    103[39m [43m    [49m[43mbarmode[49m[43m=[49m[33;43m'[39;49m[33;43mgroup[39;49m[33;43m'[39;49m[43m,[49m
+[32m    104[39m [43m    [49m[43mlegend[49m[43m=[49m[38;5;28;43mdict[39;49m[43m([49m
+[32m    105[39m [43m        [49m[43morientation[49m[43m=[49m[33;43m"[39;49m[33;43mh[39;49m[33;43m"[39;49m[43m,[49m
+[32m    106[39m [43m        [49m[43my[49m[43m=[49m[32;43m1.1[39;49m[43m,[49m
+[32m    107[39m [43m        [49m[43mx[49m[43m=[49m[32;43m0[39;49m[43m,[49m
+[32m    108[39m [43m        [49m[43mxanchor[49m[43m=[49m[33;43m'[39;49m[33;43mleft[39;49m[33;43m'[39;49m[43m,[49m
+[32m    109[39m [43m        [49m[43myanchor[49m[43m=[49m[33;43m'[39;49m[33;43mbottom[39;49m[33;43m'[39;49m[43m,[49m
+[32m    110[39m [43m        [49m[43mfont[49m[43m=[49m[38;5;28;43mdict[39;49m[43m([49m[43msize[49m[43m=[49m[32;43m12[39;49m[43m)[49m
+[32m    111[39m [43m    [49m[43m)[49m[43m,[49m
+[32m    112[39m [43m    [49m[43mupdatemenus[49m[43m=[49m[43m[[49m[43m{[49m
+[32m    113[39m [43m        [49m[33;43m'[39;49m[33;43mbuttons[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[43mbuttons[49m[43m,[49m
+[32m    114[39m [43m        [49m[33;43m'[39;49m[33;43mdirection[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[33;43m'[39;49m[33;43mdown[39;49m[33;43m'[39;49m[43m,[49m
+[32m    115[39m [43m        [49m[33;43m'[39;49m[33;43mshowactive[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[32m    116[39m [43m        [49m[33;43m'[39;49m[33;43mx[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[32;43m0.60[39;49m[43m,[49m
+[32m    117[39m [43m        [49m[33;43m'[39;49m[33;43mxanchor[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[33;43m'[39;49m[33;43mleft[39;49m[33;43m'[39;49m[43m,[49m
+[32m    118[39m [43m        [49m[33;43m'[39;49m[33;43my[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[32;43m1.18[39;49m[43m,[49m
+[32m    119[39m [43m        [49m[33;43m'[39;49m[33;43myanchor[39;49m[33;43m'[39;49m[43m:[49m[43m [49m[33;43m'[39;49m[33;43mtop[39;49m[33;43m'[39;49m
+[32m    120[39m [43m    [49m[43m}[49m[43m][49m[43m,[49m
+[32m    121[39m [43m    [49m[43mmargin[49m[43m=[49m[38;5;28;43mdict[39;49m[43m([49m[43mt[49m[43m=[49m[32;43m150[39;49m[43m)[49m[43m,[49m
+[32m    122[39m [43m    [49m[43mxaxis[49m[43m=[49m[38;5;28;43mdict[39;49m[43m([49m
+[32m    123[39m [43m        [49m[43mtickmode[49m[43m=[49m[33;43m'[39;49m[33;43marray[39;49m[33;43m'[39;49m[43m,[49m
+[32m    124[39m [43m        [49m[43mtickvals[49m[43m=[49m[43minitial_x_labels[49m[43m,[49m
+[32m    125[39m [43m        [49m[43mticktext[49m[43m=[49m[43minitial_x_labels[49m[43m,[49m
+[32m    126[39m [43m        [49m[43mtickangle[49m[43m=[49m[43m-[49m[32;43m45[39;49m[43m,[49m
+[32m    127[39m [43m        [49m[43mtitle[49m[43m=[49m[33;43m'[39;49m[33;43mDistrict (High Safety → Low Safety)[39;49m[33;43m'[39;49m
+[32m    128[39m [43m    [49m[43m)[49m[43m,[49m
+[32m    129[39m [43m    [49m[43myaxis_title[49m[43m=[49m[33;43m'[39;49m[33;43mPercentage[39;49m[33;43m'[39;49m[43m,[49m
+[32m    130[39m [43m    [49m[43mhovermode[49m[43m=[49m[33;43m'[39;49m[33;43mx unified[39;49m[33;43m'[39;49m[43m,[49m
+[32m    131[39m [43m    [49m[43mhoverlabel[49m[43m=[49m[38;5;28;43mdict[39;49m[43m([49m
+[32m    132[39m [43m        [49m[43mbgcolor[49m[43m=[49m[33;43m"[39;49m[33;43mwhite[39;49m[33;43m"[39;49m[43m,[49m
+[32m    133[39m [43m        [49m[43mfont_size[49m[43m=[49m[32;43m14[39;49m[43m,[49m
+[32m    134[39m [43m        [49m[43mfont_family[49m[43m=[49m[33;43m"[39;49m[33;43mArial[39;49m[33;43m"[39;49m
+[32m    135[39m [43m    [49m[43m)[49m[43m,[49m
+[32m    136[39m [43m    [49m[43mheight[49m[43m=[49m[32;43m600[39;49m[43m,[49m
+[32m    137[39m [43m    [49m[43mwidth[49m[43m=[49m[33;43m'[39;49m[33;43m100[39;49m[33;43m%[39;49m[33;43m'[39;49m
+[32m    138[39m [43m)[49m
+[32m    140[39m [38;5;66;03m# Render the chart[39;00m
+[32m    141[39m plot_html = pyo.plot(fig, include_plotlyjs=[33m'[39m[33mcdn[39m[33m'[39m, output_type=[33m'[39m[33mdiv[39m[33m'[39m)
 
-[31mModuleNotFoundError[39m: No module named 'geopandas'
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/graph_objs/_figure.py:219[39m, in [36mFigure.update_layout[39m[34m(self, dict1, overwrite, **kwargs)[39m
+[32m    193[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mupdate_layout[39m([38;5;28mself[39m, dict1=[38;5;28;01mNone[39;00m, overwrite=[38;5;28;01mFalse[39;00m, **kwargs) -> [33m"[39m[33mFigure[39m[33m"[39m:
+[32m    194[39m [38;5;250m    [39m[33;03m"""[39;00m
+[32m    195[39m 
+[32m    196[39m [33;03m    Update the properties of the figure's layout with a dict and/or with[39;00m
+[32m   (...)[39m[32m    217[39m 
+[32m    218[39m [33;03m    """[39;00m
+[32m--> [39m[32m219[39m     [38;5;28;01mreturn[39;00m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[43m.[49m[43mupdate_layout[49m[43m([49m[43mdict1[49m[43m,[49m[43m [49m[43moverwrite[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:1413[39m, in [36mBaseFigure.update_layout[39m[34m(self, dict1, overwrite, **kwargs)[39m
+[32m   1389[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mupdate_layout[39m([38;5;28mself[39m, dict1=[38;5;28;01mNone[39;00m, overwrite=[38;5;28;01mFalse[39;00m, **kwargs):
+[32m   1390[39m [38;5;250m    [39m[33;03m"""[39;00m
+[32m   1391[39m [33;03m    Update the properties of the figure's layout with a dict and/or with[39;00m
+[32m   1392[39m [33;03m    keyword arguments.[39;00m
+[32m   (...)[39m[32m   1411[39m [33;03m        The Figure object that the update_layout method was called on[39;00m
+[32m   1412[39m [33;03m    """[39;00m
+[32m-> [39m[32m1413[39m     [38;5;28;43mself[39;49m[43m.[49m[43mlayout[49m[43m.[49m[43mupdate[49m[43m([49m[43mdict1[49m[43m,[49m[43m [49m[43moverwrite[49m[43m=[49m[43moverwrite[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+[32m   1414[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:5215[39m, in [36mBasePlotlyType.update[39m[34m(self, dict1, overwrite, **kwargs)[39m
+[32m   5213[39m     [38;5;28;01mwith[39;00m [38;5;28mself[39m.figure.batch_update():
+[32m   5214[39m         BaseFigure._perform_update([38;5;28mself[39m, dict1, overwrite=overwrite)
+[32m-> [39m[32m5215[39m         [43mBaseFigure[49m[43m.[49m[43m_perform_update[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mkwargs[49m[43m,[49m[43m [49m[43moverwrite[49m[43m=[49m[43moverwrite[49m[43m)[49m
+[32m   5216[39m [38;5;28;01melse[39;00m:
+[32m   5217[39m     BaseFigure._perform_update([38;5;28mself[39m, dict1, overwrite=overwrite)
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:4010[39m, in [36mBaseFigure._perform_update[39m[34m(plotly_obj, update_obj, overwrite)[39m
+[32m   4007[39m                 plotly_obj[key] = val
+[32m   4008[39m         [38;5;28;01melse[39;00m:
+[32m   4009[39m             [38;5;66;03m# Assign non-compound value[39;00m
+[32m-> [39m[32m4010[39m             [43mplotly_obj[49m[43m[[49m[43mkey[49m[43m][49m = val
+[32m   4012[39m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(plotly_obj, [38;5;28mtuple[39m):
+[32m   4014[39m     [38;5;28;01mif[39;00m [38;5;28mlen[39m(update_obj) == [32m0[39m:
+[32m   4015[39m         [38;5;66;03m# Nothing to do[39;00m
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:5990[39m, in [36mBaseLayoutType.__setitem__[39m[34m(self, prop, value)[39m
+[32m   5987[39m match = [38;5;28mself[39m._subplot_re_match(prop)
+[32m   5988[39m [38;5;28;01mif[39;00m match [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m   5989[39m     [38;5;66;03m# Set as ordinary property[39;00m
+[32m-> [39m[32m5990[39m     [38;5;28;43msuper[39;49m[43m([49m[43mBaseLayoutHierarchyType[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m)[49m[43m.[49m[34;43m__setitem__[39;49m[43m([49m[43mprop[49m[43m,[49m[43m [49m[43mvalue[49m[43m)[49m
+[32m   5991[39m [38;5;28;01melse[39;00m:
+[32m   5992[39m     [38;5;66;03m# Set as subplotid property[39;00m
+[32m   5993[39m     [38;5;28mself[39m._set_subplotid_prop(prop, value)
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:4952[39m, in [36mBasePlotlyType.__setitem__[39m[34m(self, prop, value)[39m
+[32m   4948[39m         [38;5;28mself[39m._set_array_prop(prop, value)
+[32m   4950[39m     [38;5;66;03m# ### Handle simple property ###[39;00m
+[32m   4951[39m     [38;5;28;01melse[39;00m:
+[32m-> [39m[32m4952[39m         [38;5;28;43mself[39;49m[43m.[49m[43m_set_prop[49m[43m([49m[43mprop[49m[43m,[49m[43m [49m[43mvalue[49m[43m)[49m
+[32m   4953[39m [38;5;28;01melse[39;00m:
+[32m   4954[39m     [38;5;66;03m# Make sure properties dict is initialized[39;00m
+[32m   4955[39m     [38;5;28mself[39m._init_props()
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:5296[39m, in [36mBasePlotlyType._set_prop[39m[34m(self, prop, val)[39m
+[32m   5294[39m         [38;5;28;01mreturn[39;00m
+[32m   5295[39m     [38;5;28;01melse[39;00m:
+[32m-> [39m[32m5296[39m         [38;5;28;01mraise[39;00m err
+[32m   5298[39m [38;5;66;03m# val is None[39;00m
+[32m   5299[39m [38;5;66;03m# -----------[39;00m
+[32m   5300[39m [38;5;28;01mif[39;00m val [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m   5301[39m     [38;5;66;03m# Check if we should send null update[39;00m
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/plotly/basedatatypes.py:5291[39m, in [36mBasePlotlyType._set_prop[39m[34m(self, prop, val)[39m
+[32m   5288[39m validator = [38;5;28mself[39m._get_validator(prop)
+[32m   5290[39m [38;5;28;01mtry[39;00m:
+[32m-> [39m[32m5291[39m     val = [43mvalidator[49m[43m.[49m[43mvalidate_coerce[49m[43m([49m[43mval[49m[43m)[49m
+[32m   5292[39m [38;5;28;01mexcept[39;00m [38;5;167;01mValueError[39;00m [38;5;28;01mas[39;00m err:
+[32m   5293[39m     [38;5;28;01mif[39;00m [38;5;28mself[39m._skip_invalid:
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_plotly_utils/basevalidators.py:805[39m, in [36mNumberValidator.validate_coerce[39m[34m(self, v)[39m
+[32m    802[39m [38;5;28;01melse[39;00m:
+[32m    803[39m     [38;5;66;03m# Check numeric[39;00m
+[32m    804[39m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(v, numbers.Number):
+[32m--> [39m[32m805[39m         [38;5;28;43mself[39;49m[43m.[49m[43mraise_invalid_val[49m[43m([49m[43mv[49m[43m)[49m
+[32m    807[39m     [38;5;66;03m# Check min/max[39;00m
+[32m    808[39m     [38;5;28;01mif[39;00m [38;5;28mself[39m.has_min_max:
+
+[36mFile [39m[32m/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_plotly_utils/basevalidators.py:299[39m, in [36mBaseValidator.raise_invalid_val[39m[34m(self, v, inds)[39m
+[32m    296[39m             [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m inds:
+[32m    297[39m                 name += [33m"[39m[33m[[39m[33m"[39m + [38;5;28mstr[39m(i) + [33m"[39m[33m][39m[33m"[39m
+[32m--> [39m[32m299[39m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[32m    300[39m [38;5;250m            [39m[33;03m"""[39;00m
+[32m    301[39m [33;03m    Invalid value of type {typ} received for the '{name}' property of {pname}[39;00m
+[32m    302[39m [33;03m        Received value: {v}[39;00m
+[32m    303[39m 
+[32m    304[39m [33;03m{valid_clr_desc}"""[39;00m.format(
+[32m    305[39m                 name=name,
+[32m    306[39m                 pname=[38;5;28mself[39m.parent_name,
+[32m    307[39m                 typ=type_str(v),
+[32m    308[39m                 v=[38;5;28mrepr[39m(v),
+[32m    309[39m                 valid_clr_desc=[38;5;28mself[39m.description(),
+[32m    310[39m             )
+[32m    311[39m         )
+
+[31mValueError[39m: 
+    Invalid value of type 'builtins.str' received for the 'width' property of layout
+        Received value: '100%'
+
+    The 'width' property is a number and may be specified as:
+      - An int or float in the interval [10, inf]
 
