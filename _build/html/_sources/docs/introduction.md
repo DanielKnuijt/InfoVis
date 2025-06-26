@@ -13,29 +13,35 @@ This data story investigates recent crime numbers in Chicago and explores whethe
 ![alt text](../misc./fp.jpg)
 
 
-## Perspective 1: Tackling Crime in Chicago Requires Targeted Solutions
+## Perspective 1: General view on crime in chicago
 
-Although Chicago is often portrayed as a city plagued by uncontrollable crime, this image is too one-dimensional. Recent crime data shows that what happens in the city varies greatly by location and social context. Where crime occurs is not random—it is concentrated in neighborhoods that face persistent social and economic challenges. Therefore, how we respond matters: broad, citywide measures are not as effective as targeted local interventions. To truly reduce crime, we need solutions tailored to the people and places most affected.
+General View on Crime in Chicago
+While Chicago is often known for high crime rates, there have been positive developments in recent years.
+
 
 ### Argument 1: Violence is concentrated in a few high-risk neighborhoods
 
-Crime data reveals that a large share of violent incidents takes place in a small number of neighborhoods, such as District 11 (West Garfield Park) and District 7 (Englewood). These are not isolated cases, but areas that have long suffered from underinvestment and a lack of public services. Who lives in these areas matters: many residents face unemployment, poverty, and reduced access to education or healthcare. Instead of applying uniform policing, when authorities focus on community-based programs in these areas, outcomes improve. (Visual 4)
+The total number of reported crimes in Chicago has been slowly decreasing over the past years, especially during the COVID-19 pandemic when fewer people were outside and social interaction was limited. (Visual 2)
+
 
 ### Argument 2: Social context can shift crime patterns over time
 
-Over the past ten years, Chicago has seen a gradual decline in many types of crime. This trend became especially clear during the COVID-19 pandemic (2020–2021), when crimes like burglary and robbery fell sharply due to lockdowns and changes in daily life. This suggests that when the social environment changes, crime patterns shift with it. Policies that improve everyday conditions—such as housing, education, and access to services—can be powerful tools to reduce crime in the long run. (Visual 1 & 3)
+The distribution of crimes across different categories shows that common offenses like theft and property damage remain relatively stable, suggesting that prevention efforts have some effect, but continuous improvement is still necessary. In addition, the locations where crimes are committed are also distributed in certain ways. (Visuals 1 and 3)
 
-## Perspective 2: Understanding Crime Through Police Districts Reveals Structural Inequality
 
-Crime is not evenly spread across Chicago. By looking at where crimes occur—namely, across police districts—we uncover why some areas continue to struggle with safety while others thrive. These patterns reflect deeper, structural inequalities that shape how different communities experience policing, resources, and opportunities. To tackle crime effectively, we must examine who gets what kind of support and how policing is organized from district to district.
+## Perspective 2: Crime distribution per police district in Chicago
+
+Crime is not evenly distributed across Chicago, with certain police districts facing significantly higher incident rates.
+
 
 ### Argument 1: Disparities in investment fuel local crime problems
 
-Some districts with high crime rates, such as District 15 (Austin) or District 10 (North Lawndale), show a clear pattern: what they lack is not just policing, but long-term investment in infrastructure, education, and job creation. These areas have faced decades of neglect, and this history is visible in the crime data. When communities are given fewer resources, residents are more vulnerable to criminal activity and fewer opportunities for upward mobility. (Visual 5)
+Districts such as 11, 8, and 6 report noticeably higher numbers of crimes compared to other areas, indicating specific high-risk zones that require extra attention from law enforcement and policymakers. (Visuals 4 and 5)
+
 
 ### Argument 2: Local policing approaches shape how safe people feel
 
-Different police districts operate with different priorities. Where one district focuses on trust-building, another may rely on more aggressive, reactive tactics. These differences influence who feels protected and how people choose to report (or not report) crimes. For example, areas with strong community-police ties may see more cooperation and fewer repeat offenses. A district-level lens helps develop tailored strategies that match local needs and rebuild trust between residents and law enforcement. (Visual 6)
+On the other hand, districts like 20 and 22 show relatively low crime rates, suggesting that targeted interventions and community-based strategies can be effective in reducing crime levels. (Visual 6)
 
      
 
