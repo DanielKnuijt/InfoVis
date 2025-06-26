@@ -1,0 +1,2 @@
+# prevent automatic notebook cleaning
+.ipynb_checkpoints
