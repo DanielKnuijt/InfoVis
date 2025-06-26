@@ -1,13 +1,13 @@
-# **Work distribution**
+# **Work Distribution**
 
-## Daniel Knuijt
-Daniel heeft vooral de backend geregeld zoals het opzetten van de website, het verwerken van de datasets en het creeren van de visuals
-
-## Mica Blaauw
-Mica heeft gewerkt aan de introductie, perspectives en de verschillende argumenten
+## Daniel Knuijt 
+Daniel has worked on most of the visualizations. In addition, he has made the github and the website so he has done very much for us.
 
 ## Alex Oprea
-Alex heeft gewerkt aan de reflectie en enkele visuals
+Alex has worked on one of the visualizations. He made sure our map visualization was made. In addition, he has worked on the reflection and conclusion.
 
-## Dinant Zonnevelt
-?
+## Mica Blaauw
+Mica has worked on the introduction, perspectives and the arguments. In addition, he has worked a bit on visualizations.
+
+## Dinant Zonneveld
+Dinan has worked on the introduction, perspectives and the arguments. In addition, he has worked a bit on visualizations.
