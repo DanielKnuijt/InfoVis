@@ -52,5 +52,5 @@ This bar-chart uses the trust variable from dataset 2, incombination with the cr
 please note that for the trust-score, the same measurement system is used as noted in visual 5.
 
 
-## Visual 7
+### Visual 7
 This box-plot shows the timeframe of when most crimes are committed. using mean, median, Q1, Q3, min and max; it gives a clear insight on when most crimes are committed. adding a dropdown menu to make it possible to view this data for each year in the dataset. Adding a hover popup when hovering your mouse over the center of the box-plot, all previously mentioned values are shown, making it easy to compare the values between years.

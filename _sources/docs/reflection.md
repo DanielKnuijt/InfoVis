@@ -1,25 +1,24 @@
 # **Reflection**
 ## Peer Feedback
-
 On June 19, 2025, our group, G3, received valuable feedback from another student group and Pepijn regarding our draft for the final data story. The feedback session allowed us to reflect on both strengths and areas for improvement.
 
 Pepijn positively noted that our draft was the most complete among all G-groups, which was encouraging. However, several constructive points were raised:
 
-The need for a clearer and more consistent focus in our story. Our introduction mentioned gang violence, but our perspectives centered on inequality, which made the argumentation feel disconnected. We were advised to ensure the introduction aligns better with the chosen perspectives.
+- The need for a clearer and more consistent focus in our story. Our introduction mentioned gang violence, but our perspectives centered on inequality, which made the argumentation feel disconnected. We were advised to ensure the introduction aligns better with the chosen perspectives.
 
-A more detailed description of the dataset pre-processing steps was missing. While we listed the datasets used, further elaboration on how the data was cleaned and prepared was requested.
+- A more detailed description of the dataset pre-processing steps was missing. While we listed the datasets used, further elaboration on how the data was cleaned and prepared was requested.
 
-Each visualization should be explicitly linked to the perspective it supports, to improve clarity and coherence.
+- Each visualization should be explicitly linked to the perspective it supports, to improve clarity and coherence.
 
-Following the initial feedback from Pepijn, additional points were raised by both the TA and the peer group, including:
+- Following the initial feedback from Pepijn, additional points were raised by both the TA and the peer group, including:
 
-Always support facts with clear sources instead of making assumptions.
+- Always support facts with clear sources instead of making assumptions.
 
-Make the overall story clearer by explicitly addressing the 5 W’s (Who, What, Where, When, Why).
+- Make the overall story clearer by explicitly addressing the 5 W’s (Who, What, Where, When, Why).
 
-Enhance the visuals by ensuring all variables are properly explained for the reader’s understanding.
+- Enhance the visuals by ensuring all variables are properly explained for the reader’s understanding.
 
-Avoid using all caps for variable names to improve readability and professionalism.
+- Avoid using all caps for variable names to improve readability and professionalism.
 
 We appreciated the feedback as it helped us identify key areas for improvement. We immediately planned to incorporate these suggestions as a team in the following week to strengthen our final submission.
 
