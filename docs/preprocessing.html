@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Dataset and Preprocessing &#8212; Crime by the numbers; a datastory of Chicago</title>
+    <title>Dataset and preprocessing &#8212; Crime by the numbers; a datastory of Chicago</title>
   
   
   
@@ -181,7 +181,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Dataset and Preprocessing</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Dataset and preprocessing</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="datastory.html"><strong>Visualisations and perspectives</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="reflection.html"><strong>Reflection</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="workdis.html"><strong>Work Distribution</strong></a></li>
@@ -371,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Dataset and Preprocessing</h1>
+    <h1>Dataset and preprocessing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -381,27 +381,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-1">Dataset 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-2">Dataset 2</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals">Visuals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-1-4">Visuals 1-4</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-1">Visual 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-2">Visual 2</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-3">Visual 3</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-5">Visual 5</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-6">Visual 6</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-7">Visual 7</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-descriptions">Variable descriptions</a></li>
 </ul>
             </nav>
         </div>
@@ -414,69 +395,19 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dataset-and-preprocessing">
-<h1><strong>Dataset and Preprocessing</strong><a class="headerlink" href="#dataset-and-preprocessing" title="Link to this heading">#</a></h1>
-<section id="datasets">
-<h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">#</a></h2>
-<section id="dataset-1">
-<h3>Dataset 1<a class="headerlink" href="#dataset-1" title="Link to this heading">#</a></h3>
-<p>The ‘crimes-2001 to Present’ dataset contains, among others, reasons for arrests, dates,
-locations, FBI codes, and community areas. These variables can contribute to detecting a
-pattern in the location of different crimes in combination with the frequency of different
-crimes. This knowledge can inform Chicago residents about the possible dangers of
-different high-risk areas in Chicago. All data in this dataset is collected from the Chicago
-police department’s own CLEAR (Citizen Law Enforcement Analysis and Reporting)
-system, ensuring optimal credibility.</p>
-<p>link: <a class="reference external" href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/about_data">https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/about_data</a></p>
+<h1><strong>Dataset and preprocessing</strong><a class="headerlink" href="#dataset-and-preprocessing" title="Link to this heading">#</a></h1>
+<p>we decided to search for two datasets that can be linked to eachother, so we could make interesting visuals. By searching google scholar we found two datasets from the chicago police department, which ensured integrity and validity since it’s from a government installation that we can trust.</p>
+<section id="cleaning">
+<h2>Cleaning<a class="headerlink" href="#cleaning" title="Link to this heading">#</a></h2>
+<p>since the two datasets use records by day, we first changed this to contain records by year, which made it easier to then later on create the visuals. the ‘crime-data’ dataset now contains multiple records per year, while the ‘sentiment-data’ dataset contains one record per year per district, using mean to merge.</p>
+<p>By doing so, the ‘crime-data’ dataset contains 144761 records, while the ‘sentiment-data’ dataset now only contains 133 records.</p>
 </section>
-<section id="dataset-2">
-<h3>Dataset 2<a class="headerlink" href="#dataset-2" title="Link to this heading">#</a></h3>
-<p>The ‘Police sentiment scores’ dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights.</p>
-<p>link: <a class="reference external" href="https://catalog.data.gov/dataset/police-sentiment-scores">https://catalog.data.gov/dataset/police-sentiment-scores</a></p>
-</section>
-</section>
-<section id="visuals">
-<h2>Visuals<a class="headerlink" href="#visuals" title="Link to this heading">#</a></h2>
-<section id="visuals-1-4">
-<h3>Visuals 1-4<a class="headerlink" href="#visuals-1-4" title="Link to this heading">#</a></h3>
-<p>These visuals are all made using the Preprocessed dataset 1, containing only the data from the years 2018-2023. This selection gives plenty of records to ensure reliable results. This timespan also gives an interesting insight on the influence of the COVID-19 pandemic on Chicago’s crime life.</p>
-<p>to aggregate dataset 1, we read the .csv file using the pandas package. after this we select the ‘Date’ variable and the other variables that we want to keep for our visuals, dropping all other irrelevant variables (reducing file size). Now that we have our smaller .csv file, we can filter the Date (containing dd/mm/yy and hh/mm AM/PM) to only contain the year. Because the year needs to be between 2018 and 2023, we drop all rows containing data from other years, removing all data from irrelevant years. After this we have our final dataset, that can be saved using the .to_csv() function.</p>
-<section id="visual-1">
-<h4>Visual 1<a class="headerlink" href="#visual-1" title="Link to this heading">#</a></h4>
-<p>The most common crime types are counted where empty rows are ignored. At last, this result is presented as percentages of the total amount of crimes committed during 6-year time span.</p>
-</section>
-<section id="visual-2">
-<h4>Visual 2<a class="headerlink" href="#visual-2" title="Link to this heading">#</a></h4>
-<p>The total number of rows are counted for each one of the six years, and put into a line-diagram. This is a quick and effective way to count crimes per year, as each record represents one crime.</p>
-</section>
-<section id="visual-3">
-<h4>Visual 3<a class="headerlink" href="#visual-3" title="Link to this heading">#</a></h4>
-<p>The most common crime-scenes are counted and put into a pie-chart. This pie chart clearly shows the most popular crime-scenes, together with some less-popular crime-scenes. This pie-chart shows the average of the years 2018-2023. Finally the Pie-chart is transformed into a donut-chart for aestetic purposes.</p>
-</section>
-<section id="visual-4">
-<h4>Visual 4<a class="headerlink" href="#visual-4" title="Link to this heading">#</a></h4>
-<p>The amount of times each police district presents itself in the dataset is counted, as each record represents one crime. This Bar chart gives a clear visual of the difference in crime rates in various districts. For visual clearness, the bars in the chart are descending from high-crime districts to low-crime districts. Since the number connected to each district has no numerical meaning, it does not matter that these numbers are not consecutive on the x-axis.</p>
-</section>
-</section>
-<section id="visuals-5-6">
-<h3>Visuals 5 &amp; 6<a class="headerlink" href="#visuals-5-6" title="Link to this heading">#</a></h3>
-<p>These visuals rely on Dataset 2, this dataset is aggregated to only contain data from 2018-2023. Because this dataset contains the dates by start-date and end-date (month/day/year), we first removed all data-entries where the start-date was before 2018, or the end date was after 2023. after this, we converted each end date to a ‘Year’ variable, making it easier to merge the data later on. To make sure each record contains one year per district, we merged on year and district using mean. This results in a dataset where each entry has a different district and year, with all other values being the mean of all values from that district in that year.</p>
-<section id="visual-5">
-<h4>Visual 5<a class="headerlink" href="#visual-5" title="Link to this heading">#</a></h4>
-<p>This grouped bar-chart uses various variables from the previously aggregated dataset 2. the ‘SAFETY’ variable, ‘S_INCOME_LOW’, ‘S_INCOME_MEDIUM’ and ‘S_INCOME_HIGH’ variables are shown for each of the districts, with the safety score descending from high to low, from the left side of the chart to the right. A dropdown menu is added to make it possible to view the different safety scores for each year.</p>
-<p>please note that all of these variables are in percentages, while in reality this is linked to a survey that residents of each district have filled in, scoring safety on a scale of 0-10. When a score of 7 is given, this correlates to 70%. This makes it so that the percentages of low, medium and high income do not make up 100%, but more. As people with a high income rank their safety differently as people with a low income. the safety-score that is not linked to income is the total average safety score, calculated from all various variables in the dataset together.</p>
-</section>
-<section id="visual-6">
-<h4>Visual 6<a class="headerlink" href="#visual-6" title="Link to this heading">#</a></h4>
-<p>This bar-chart uses the trust variable from dataset 2, incombination with the crime-rate calculated by counting the occurrences of each district per year from dataset 1. combining two bars into one gives a clear insight that a decrease in crime-rate is accompanied by an increase in trust score and vice versa. A dropdown menu is added to make it possible to select for which year the user wants to view this information.</p>
-<p>please note that for the trust-score, the same measurement system is used as noted in visual 5.</p>
-</section>
-</section>
-<section id="visual-7">
-<h3>Visual 7<a class="headerlink" href="#visual-7" title="Link to this heading">#</a></h3>
-<p>This visual uses Dataset 1 with another aggregation of the original dataset. First the ‘Date’ variable is selected, which is the only variable that we need for this plot.</p>
-<p>Because the dataset is structured in a way that each row correlates to one crime, we can use panda’s .todatetime function to retrieve the year and time from each row while creating the plot, where the year can be selected, and the distribution of time is shown</p>
-<p>This box-plot shows the timeframe of when most crimes are committed. using mean, median, Q1, Q3, min and max; it gives a clear insight on when most crimes are committed. adding a dropdown menu to make it possible to view this data for each year in the dataset. Adding a hover popup when hovering your mouse over the center of the box-plot, all previously mentioned values are shown, making it easy to compare the values between years.</p>
-</section>
+<section id="variable-descriptions">
+<h2>Variable descriptions<a class="headerlink" href="#variable-descriptions" title="Link to this heading">#</a></h2>
+<p>after selecting the variables that we want to use and dropping all irrelevant variables we are left with 11 variables: <code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">District</span></code>, <code class="docutils literal notranslate"><span class="pre">Date</span></code>, <code class="docutils literal notranslate"><span class="pre">Primary</span> <span class="pre">Type</span></code>, <code class="docutils literal notranslate"><span class="pre">Location</span> <span class="pre">Description</span></code>,<code class="docutils literal notranslate"><span class="pre">Safety</span></code>,<code class="docutils literal notranslate"><span class="pre">Trust</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_LOW</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_MEDIUM</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_HIGH</span></code></p>
+<p>Discrete / Ordinal: <code class="docutils literal notranslate"><span class="pre">Safety</span></code>,<code class="docutils literal notranslate"><span class="pre">Trust</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_LOW</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_MEDIUM</span></code>,<code class="docutils literal notranslate"><span class="pre">S_INCOME_HIGH</span></code>
+Discrete / Nominal: <code class="docutils literal notranslate"><span class="pre">District</span></code>,<code class="docutils literal notranslate"><span class="pre">Primary</span> <span class="pre">Type</span></code>,<code class="docutils literal notranslate"><span class="pre">Location</span> <span class="pre">Description</span></code>
+Discrete / Interval: <code class="docutils literal notranslate"><span class="pre">Date</span></code>, <code class="docutils literal notranslate"><span class="pre">Year</span></code></p>
 </section>
 </section>
 
@@ -544,27 +475,8 @@ system, ensuring optimal credibility.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-1">Dataset 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-2">Dataset 2</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals">Visuals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-1-4">Visuals 1-4</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-1">Visual 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-2">Visual 2</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-3">Visual 3</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-5">Visual 5</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-6">Visual 6</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-7">Visual 7</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-descriptions">Variable descriptions</a></li>
 </ul>
   </nav></div>
 

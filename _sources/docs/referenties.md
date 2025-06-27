@@ -9,3 +9,7 @@
 4. Schnell, C., Braga, A. A., & Piza, E. L. (2016). The influence of community areas, neighborhood clusters, and street segments on the spatial variability of violent crime in Chicago. Journal of Quantitative Criminology, 33(3), 469–496. https://doi.org/10.1007s10940-016-9313-x 
 
 5. Yang, M., Chen, Z., Zhou, M., Liang, X., & Bai, Z. (2021). The impact of COVID-19 on Crime: A spatial temporal analysis in Chicago. ISPRS International Journal of Geo-Information, 10(3), 152. https://doi.org/10.3390/ijgi10030152
+
+6. ⁠Jay, A. (2025, June 25). The connection between income inequality and crime rate is a subject that has baffled many social scientists,. Financesonline.com. https://financesonline.com/how-income-inequality-affects-crime-rates/
+
+7. ⁠FBI Releases 2019 Crime Statistics. (2022, July 21). https://www.fbi.gov/news/press-releases/fbi-releases-2019-crime-statistics
