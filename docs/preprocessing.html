@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -394,9 +394,14 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-5">Visual 5</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-6">Visual 6</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-7">Visual 7</a></li>
 </ul>
             </nav>
         </div>
@@ -425,7 +430,7 @@ system, ensuring optimal credibility.</p>
 </section>
 <section id="dataset-2">
 <h3>Dataset 2<a class="headerlink" href="#dataset-2" title="Link to this heading">#</a></h3>
-<p>The ‘Police sentiment scores’ dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights. This dataset will be used in the full report (not yet in this draft version)</p>
+<p>The ‘Police sentiment scores’ dataset contains various variables such as: race, gender, district, income, education and alot more usefull variables, that in combination with Datasets 1 and/or 2 can give interesting insights.</p>
 <p>link: <a class="reference external" href="https://catalog.data.gov/dataset/police-sentiment-scores">https://catalog.data.gov/dataset/police-sentiment-scores</a></p>
 </section>
 </section>
@@ -440,7 +445,7 @@ system, ensuring optimal credibility.</p>
 </section>
 <section id="visual-2">
 <h4>Visual 2<a class="headerlink" href="#visual-2" title="Link to this heading">#</a></h4>
-<p>The total number of rows are counted for each one of the six years, and put into a line-diagram.</p>
+<p>The total number of rows are counted for each one of the six years, and put into a line-diagram. This is a quick and effective way to count crimes per year, as each record represents one crime.</p>
 </section>
 <section id="visual-3">
 <h4>Visual 3<a class="headerlink" href="#visual-3" title="Link to this heading">#</a></h4>
@@ -448,14 +453,27 @@ system, ensuring optimal credibility.</p>
 </section>
 <section id="visual-4">
 <h4>Visual 4<a class="headerlink" href="#visual-4" title="Link to this heading">#</a></h4>
-<p>The total amount of crimes are counted for each Police-district in Chicago. This Bar chart gives a clear visual of the difference in crimes in various districts.</p>
-<p>in the Final project we plan to replace the numbers (x-axis) with the actual names of each district, removing the empty spaces (like district 13,21,etc.)</p>
+<p>The amount of times each police district presents itself in the dataset is counted, as each record represents one crime. This Bar chart gives a clear visual of the difference in crime rates in various districts. For visual clearness, the bars in the chart are descending from high-crime districts to low-crime districts. Since the number connected to each district has no numerical meaning, it does not matter that these numbers are not consecutive on the x-axis.</p>
 </section>
 </section>
 <section id="visuals-5-6">
 <h3>Visuals 5 &amp; 6<a class="headerlink" href="#visuals-5-6" title="Link to this heading">#</a></h3>
-<p>these will be in the final report (they are not finished for this draft version)</p>
+<p>These visuals rely on Dataset 2, this dataset is aggregated to only contain data from 2018-2023. To make sure each record contains one year per district, we merged on year and district using mean. This results in a dataset where each entry has a different district and year, with all other values being the mean of all values from that district in that year.</p>
+<section id="visual-5">
+<h4>Visual 5<a class="headerlink" href="#visual-5" title="Link to this heading">#</a></h4>
+<p>This grouped bar-chart uses various variables from the previously aggregated dataset 2. the ‘SAFETY’ variable, ‘S_INCOME_LOW’, ‘S_INCOME_MEDIUM’ and ‘S_INCOME_HIGH’ variables are shown for each of the districts, with the safety score descending from high to low, from the left side of the chart to the right. A dropdown menu is added to make it possible to view the different safety scores for each year.</p>
+<p>please note that all of these variables are in percentages, while in reality this is linked to a survey that residents of each district have filled in, scoring safety on a scale of 0-10. When a score of 7 is given, this correlates to 70%. This makes it so that the percentages of low, medium and high income do not make up 100%, but more. As people with a high income rank their safety differently as people with a low income. the safety-score that is not linked to income is the total average safety score, calculated from all various variables in the dataset together.</p>
 </section>
+<section id="visual-6">
+<h4>Visual 6<a class="headerlink" href="#visual-6" title="Link to this heading">#</a></h4>
+<p>This bar-chart uses the trust variable from dataset 2, incombination with the crime-rate calculated by counting the occurrences of each district per year from dataset 1. combining two bars into one gives a clear insight that a decrease in crime-rate is accompanied by an increase in trust score and vice versa. A dropdown menu is added to make it possible to select for which year the user wants to view this information.</p>
+<p>please note that for the trust-score, the same measurement system is used as noted in visual 5.</p>
+</section>
+</section>
+</section>
+<section id="visual-7">
+<h2>Visual 7<a class="headerlink" href="#visual-7" title="Link to this heading">#</a></h2>
+<p>This box-plot shows the timeframe of when most crimes are committed. using mean, median, Q1, Q3, min and max; it gives a clear insight on when most crimes are committed. adding a dropdown menu to make it possible to view this data for each year in the dataset. Adding a hover popup when hovering your mouse over the center of the box-plot, all previously mentioned values are shown, making it easy to compare the values between years.</p>
 </section>
 </section>
 
@@ -536,9 +554,14 @@ system, ensuring optimal credibility.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-4">Visual 4</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visuals-5-6">Visuals 5 &amp; 6</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-5">Visual 5</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-6">Visual 6</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-7">Visual 7</a></li>
 </ul>
   </nav></div>
 
