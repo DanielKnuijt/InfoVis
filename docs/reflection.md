@@ -10,7 +10,8 @@ Pepijn positively noted that our draft was the most complete among all G-groups,
 
 - Each visualization should be explicitly linked to the perspective it supports, to improve clarity and coherence.
 
-- Following the initial feedback from Pepijn, additional points were raised by both the TA and the peer group, including:
+
+ Following the initial feedback from Pepijn, additional points were raised by both the TA and the peer group, including:
 
 - Always support facts with clear sources instead of making assumptions.
 
